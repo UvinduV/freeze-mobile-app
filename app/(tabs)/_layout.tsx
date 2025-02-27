@@ -1,12 +1,25 @@
 import { Tabs } from "expo-router";
+import { Ionicons } from '@expo/vector-icons';
 
 export default function TabLayout(){
     return (
-        <Tabs>
-            <Tabs.Screen name='home' options={{headerTitle:'Home', title:'Home'}} />
-            <Tabs.Screen name='categories' options={{headerTitle:'Category', title:'shop'}} />
-            <Tabs.Screen name='cart' options={{headerTitle:'Cart', title:'Cart'}} />
-            <Tabs.Screen name='account' options={{headerTitle:'My Account', title:'You'}} />
+        <Tabs screenOptions={{headerShown:false,tabBarActiveTintColor:"#D84040"}}>
+            <Tabs.Screen name='home' options={{headerTitle:'Home', title:'Home',
+                tabBarIcon: ({ color, size }) => (
+                    <Ionicons name="home" size={size} color={color} />
+                )}} />
+            <Tabs.Screen name='categories' options={{headerTitle:'Category', title:'shop',
+                tabBarIcon: ({ color, size }) => (
+                    <Ionicons name="grid" size={size} color={color} />
+                )}} />
+            <Tabs.Screen name='cart' options={{headerTitle:'Cart', title:'Cart',
+                tabBarIcon: ({ color, size }) => (
+                    <Ionicons name="cart" size={size} color={color} />
+                ),}} />
+            <Tabs.Screen name='account' options={{headerTitle:'My Account', title:'You',
+                tabBarIcon: ({ color, size }) => (
+                    <Ionicons name="person" size={size} color={color} />
+                )}} />
         </Tabs>
     )
 }
