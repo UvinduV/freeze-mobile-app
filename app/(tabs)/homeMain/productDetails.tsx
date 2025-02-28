@@ -19,7 +19,7 @@ export default function ProductDetails() {
     return (
         <View style={styles.container}>
             <View>
-                <Header/>
+                <Header isCart={false}/>
             </View>
             <Image
                 source={{uri:item.image}}

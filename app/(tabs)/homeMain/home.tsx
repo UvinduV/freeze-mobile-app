@@ -11,7 +11,7 @@ export default function Home (){
 
     return (
         <View style={styles.container}>
-            <Header/>
+            <Header isCart={false}/>
             <Text style={styles.selectText}>Select Your Style</Text>
             {/*input*/}
             <View style={styles.inputContainer}>
