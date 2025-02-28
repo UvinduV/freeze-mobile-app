@@ -1,10 +1,14 @@
-import {FlatList, StyleSheet, Text, TextInput, View} from "react-native";
+import {FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import {LinearGradient} from 'react-native-linear-gradient';
-import Header from "../../components/header";
+import Header from "../../../components/header";
 import Fontisto from "react-native-vector-icons/Fontisto";
-import ProductCart from "../../components/productCart";
+import ProductCart from "../../../components/productCart";
+import data from "../../../data/data.json";
+import {useState} from "react";
 
 export default function Home (){
+    const [products, setProducts] = useState(data.products);
+
     return (
         <View style={styles.container}>
             <Header/>
@@ -17,12 +21,17 @@ export default function Home (){
                 <TextInput style={styles.textInput} placeholder={"Search"} onChangeText={(text)=>{}}/>
             </View>
             {/*product list*/}
-            {/*<View style={styles.productMain}>*/}
-            {/*    <ProductCart/>*/}
-            {/*    <ProductCart />*/}
-            {/*</View>*/}
-            <FlatList numColumns={2} data={[1,2,3,4,5,6]} renderItem={ProductCart}
-                      showsVerticalScrollIndicator={false}/>
+
+            {/*<FlatList numColumns={2} data={products} renderItem={ProductCart}
+                      showsVerticalScrollIndicator={false}
+            />*/}
+            <FlatList numColumns={2}
+                      data={products}
+                      renderItem={({item})=>
+                          <ProductCart item={item}/>
+                      }
+                      showsVerticalScrollIndicator={false}
+            />
 
 
         </View>

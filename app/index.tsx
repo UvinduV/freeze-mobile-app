@@ -11,7 +11,7 @@ export default function Index(){
 
     function handleLogin(){
         if(username === "sanu" && password === "1212"){
-            router.replace('/home');
+            router.replace('/homeMain');
         }
     }
     return (
