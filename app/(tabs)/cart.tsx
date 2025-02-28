@@ -2,9 +2,20 @@ import {FlatList, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import Header from "../../components/header";
 import CartCard from "../../components/cartCard";
 import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
 
 export default function Cart(){
     const carts = useSelector(state => state.cart);
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    const calculateTotalPrice = () => {
+        let totalSum = carts.reduce((total:any, item:any) => total + item.price, 0);
+        totalSum = totalSum.toFixed(2);
+        setTotalPrice(totalSum);
+    };
+    useEffect(() => {
+        calculateTotalPrice();
+    }, []);
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
@@ -23,7 +34,7 @@ export default function Cart(){
             <View style={styles.priceContainer}>
                 <View style={styles.priceAndTitle}>
                     <Text style={styles.text}>Total</Text>
-                    <Text style={[styles.text,{fontWeight:"600"},{color: "black"}]}>Rs 00.00</Text>
+                    <Text style={[styles.text,{fontWeight:"600"},{color: "black"}]}>{totalPrice}</Text>
                 </View>
             </View>
             <TouchableOpacity style={styles.placeButton}>
