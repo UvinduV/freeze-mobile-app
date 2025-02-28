@@ -1,9 +1,18 @@
-import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import Header from "../../../components/header";
 import {useState} from "react";
+import {useLocalSearchParams, useRouter} from "expo-router";
 const imageUrl = "https://res.cloudinary.com/dlc5c1ycl/image/upload/v1710567613/cwlk21f74nd9iamrlzkh.png"
 
 export default function ProductDetails() {
+    // const router = useRouter();
+    // console.log(router.prams.item)
+    const params = useLocalSearchParams();
+    //const item = params.item;
+    const item = params.item ? JSON.parse(params.item as string) : null;
+
+    console.log("Product Details:", item);
+
     const [selectSize, setSelectSize] = useState("");
     const sizes= ['S', 'M', 'L', 'XL'];
 
@@ -12,9 +21,11 @@ export default function ProductDetails() {
             <View>
                 <Header/>
             </View>
-            <image source={{uri: imageUrl}} style={styles.coverImage}/>
+            <Image
+                source={{uri:item.image}}
+                style={styles.coverImage}/>
             <View style={styles.contentContainer}>
-                <Text style={styles.title}>Jacket</Text>
+                <Text style={styles.title}>{item.title}</Text>
                 <Text style={styles.price}>1250.00</Text>
             </View>
 
@@ -42,6 +53,9 @@ export default function ProductDetails() {
             </View>
 
             {/*Add cart btn*/}
+            <TouchableOpacity style={styles.button} onPress={()=>{}}>
+                <Text style={styles.buttonText}>Add Cart</Text>
+            </TouchableOpacity>
 
         </View>
     )
@@ -54,7 +68,8 @@ const styles = StyleSheet.create({
     },
     coverImage: {
         width:"100%",
-        height:420,
+        height:350,
+        borderRadius: 10,
     },
     contentContainer: {
         flexDirection:"row",
@@ -87,6 +102,18 @@ const styles = StyleSheet.create({
     sizeValue:{
         fontSize: 16,
 
+    },
+    button:{
+        backgroundColor: "#E55B58",
+        padding: 10,
+        margin:10,
+        borderRadius:20
+    },
+    buttonText:{
+        fontSize:20,
+        fontWeight:"600",
+        color:"#fff",
+        textAlign:"center",
     }
 
 

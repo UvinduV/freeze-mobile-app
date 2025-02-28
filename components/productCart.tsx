@@ -1,6 +1,4 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import * as url from "node:url";
-import * as path from "node:path";
 import {useRouter} from "expo-router";
 
 const ProductCart = ({item}) => {
@@ -18,7 +16,8 @@ const ProductCart = ({item}) => {
             <TouchableOpacity onPress={()=>router.push(
                     {
                         pathname:'(tabs)/homeMain/productDetails',
-                        params:{product: item},
+                        // params:{item},
+                        params: { item: JSON.stringify(item) }
                     }
                 )
             }>
