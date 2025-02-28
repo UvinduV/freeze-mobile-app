@@ -2,20 +2,34 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import Header from "../../../components/header";
 import {useState} from "react";
 import {useLocalSearchParams, useRouter} from "expo-router";
-import {handleUrlParams} from "expo-router/build/fork/getStateFromPath-forks";
+import {ProductModel} from "../../../models/productModel";
+import {addCart} from "../../../reducers/CartSlice";
+import {useDispatch} from "react-redux";
 
 export default function ProductDetails() {
+    const dispatch = useDispatch();
 
     const params = useLocalSearchParams();
     //const item = params.item;
     const item = params.item ? JSON.parse(params.item as string) : null;
     console.log("Product Details:", item);
 
+    const [image, setImage] = useState("");
+    const [title, setTitle] = useState("");
+    const [price, setPrice] = useState("");
     const [selectSize, setSelectSize] = useState("");
     const sizes= ['S', 'M', 'L', 'XL'];
 
     const handleAddToCart = (item) => {
         console.log(item);
+        setImage(item.image);
+        setTitle(item.title);
+        setPrice(item.price);
+
+        const addProduct = new ProductModel(image, title, price, selectSize);
+        dispatch(addCart(addProduct));
+        alert("Product Added Successfully!");
+        console.log(addProduct);
     }
 
     return (
