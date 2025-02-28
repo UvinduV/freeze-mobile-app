@@ -2,31 +2,32 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import Header from "../../../components/header";
 import {useState} from "react";
 import {useLocalSearchParams, useRouter} from "expo-router";
-const imageUrl = "https://res.cloudinary.com/dlc5c1ycl/image/upload/v1710567613/cwlk21f74nd9iamrlzkh.png"
+import {handleUrlParams} from "expo-router/build/fork/getStateFromPath-forks";
 
 export default function ProductDetails() {
-    // const router = useRouter();
-    // console.log(router.prams.item)
+
     const params = useLocalSearchParams();
     //const item = params.item;
     const item = params.item ? JSON.parse(params.item as string) : null;
-
     console.log("Product Details:", item);
 
     const [selectSize, setSelectSize] = useState("");
     const sizes= ['S', 'M', 'L', 'XL'];
+
+    const handleAddToCart = (item) => {
+        console.log(item);
+    }
 
     return (
         <View style={styles.container}>
             <View>
                 <Header isCart={false}/>
             </View>
-            <Image
-                source={{uri:item.image}}
+            <Image source={{uri:item.image}}
                 style={styles.coverImage}/>
             <View style={styles.contentContainer}>
                 <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.price}>1250.00</Text>
+                <Text style={styles.price}>{item.price}</Text>
             </View>
 
             {/*size*/}
@@ -53,7 +54,7 @@ export default function ProductDetails() {
             </View>
 
             {/*Add cart btn*/}
-            <TouchableOpacity style={styles.button} onPress={()=>{}}>
+            <TouchableOpacity style={styles.button} onPress={()=>{handleAddToCart(item)}}>
                 <Text style={styles.buttonText}>Add Cart</Text>
             </TouchableOpacity>
 
