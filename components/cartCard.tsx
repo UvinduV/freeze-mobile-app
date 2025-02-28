@@ -9,9 +9,7 @@ const CartCard = ({item})=>{
     const title = item.title;
     const handleRemoveToCart= (title: string) => {
         dispatch(removeCart(title));
-
     }
-
 
     return (
         <View style={styles.container}>
