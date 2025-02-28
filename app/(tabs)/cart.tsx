@@ -2,8 +2,11 @@ import {FlatList, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import Header from "../../components/header";
 import CartCard from "../../components/cartCard";
 import Fontisto from "react-native-vector-icons/Fontisto";
+import {useSelector} from "react-redux";
+import ProductCart from "../../components/productCart";
 
 export default function Cart(){
+    const carts = useSelector(state => state.cart);
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
@@ -12,7 +15,14 @@ export default function Cart(){
 
             {/*<CartCard/>*/}
             {/*<CartCard/>*/}
-            <FlatList data={[1,2,3,4,5]} renderItem={CartCard}/>
+            {/*<FlatList data={carts} renderItem={({item})=>*/}
+            {/*    <CartCard item={item}/>}/>*/}
+            <FlatList
+                data={carts}
+                renderItem={({ item }) => <CartCard item={item} />}
+                keyExtractor={(item, index) => index.toString()}
+            />
+
             {/*price*/}
             <View style={styles.priceContainer}>
                 <View style={styles.priceAndTitle}>

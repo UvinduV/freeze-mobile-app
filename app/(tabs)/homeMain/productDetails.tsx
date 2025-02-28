@@ -4,32 +4,37 @@ import {useState} from "react";
 import {useLocalSearchParams, useRouter} from "expo-router";
 import {ProductModel} from "../../../models/productModel";
 import {addCart} from "../../../reducers/CartSlice";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 export default function ProductDetails() {
+    const router = useRouter();
     const dispatch = useDispatch();
+    // const carts = useSelector(state => state.cart);
 
     const params = useLocalSearchParams();
     //const item = params.item;
     const item = params.item ? JSON.parse(params.item as string) : null;
     console.log("Product Details:", item);
 
-    const [image, setImage] = useState("");
-    const [title, setTitle] = useState("");
-    const [price, setPrice] = useState("");
+    const [image, setImage] = useState(item.image);
+    const [title, setTitle] = useState(item.title);
+    const [price, setPrice] = useState(item.price);
     const [selectSize, setSelectSize] = useState("");
     const sizes= ['S', 'M', 'L', 'XL'];
 
-    const handleAddToCart = (item) => {
+    const handleAddToCart = () => {
         console.log(item);
-        setImage(item.image);
-        setTitle(item.title);
-        setPrice(item.price);
 
         const addProduct = new ProductModel(image, title, price, selectSize);
         dispatch(addCart(addProduct));
         alert("Product Added Successfully!");
         console.log(addProduct);
+        router.push(
+            {
+                pathname:'(tabs)/cart',
+            }
+        )
+
     }
 
     return (
@@ -68,7 +73,7 @@ export default function ProductDetails() {
             </View>
 
             {/*Add cart btn*/}
-            <TouchableOpacity style={styles.button} onPress={()=>{handleAddToCart(item)}}>
+            <TouchableOpacity style={styles.button} onPress={()=>{handleAddToCart()}}>
                 <Text style={styles.buttonText}>Add Cart</Text>
             </TouchableOpacity>
 

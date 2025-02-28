@@ -1,18 +1,29 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import FontAwesome6Icon from "react-native-vector-icons/FontAwesome6";
+import {useDispatch} from "react-redux";
+import {removeCart} from "../reducers/CartSlice";
 
-const CartCard = ()=>{
+const CartCard = ({item})=>{
+    const dispatch = useDispatch();
+
+    const title = item.title;
+    const handleRemoveToCart= (title: string) => {
+        dispatch(removeCart(title));
+
+    }
+
+
     return (
         <View style={styles.container}>
-            <Image source={{uri:""}} style={styles.coverImage}/>
+            <Image source={{uri:item.image}} style={styles.coverImage}/>
             <View style={styles.cardContainer}>
-                <Text style={styles.title}>title</Text>
-                <Text style={styles.price}>price</Text>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.price}>{item.price}</Text>
                 <View style={styles.cardSizeContainer}>
-                    <Text> S </Text>
+                    <Text> {item.selectSize} </Text>
                 </View>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>{handleRemoveToCart(title)}}>
                 <FontAwesome6Icon name={"trash"} color={"red"} size={20}/>
             </TouchableOpacity>
 
