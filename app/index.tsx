@@ -13,9 +13,13 @@ export default function Index(){
     const [password,setPassword] = useState("");
 
     function handleLogin(){
-        if(username === "sanu" && password === "1212"){
+        if(username === "Sanketh12" && password === "1212"){
             router.replace('/homeMain');
         }
+    }
+    function handleNav(){
+        router.navigate('signUp');
+
     }
     return (
         <View style={styles.container}>
@@ -39,6 +43,12 @@ export default function Index(){
                 <Text style={styles.loginText}>Login</Text>
             </TouchableOpacity>
 
+            <Text style={styles.footerText}> Don't have an account?
+                <TouchableOpacity onPress={handleNav}>
+                    <Text style={{textDecorationLine:"underline",color:"#ea4440"}}> Create new</Text>
+                </TouchableOpacity>
+
+            </Text>
             <Text style={styles.text}>@Freeze_fashion</Text>
         </View>
     );
@@ -54,7 +64,7 @@ const styles = StyleSheet.create({
     mainText: {
         fontSize: 35,
         fontWeight: 600,
-        marginBottom: 20,
+        marginBottom: 10,
         fontFamily: 'Papyrus',
         textAlign:"center",
     },
@@ -67,7 +77,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginVertical:20,
         marginHorizontal:40,
-        elevation:20
+        elevation:20,
+        shadowColor: 'gray',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
 
     },
     textInput: {
@@ -109,6 +123,12 @@ const styles = StyleSheet.create({
         color:"#BEBEBE",
         textAlign:"right",
         width:"90%",
-        fontSize:12,
+        fontSize:15,
+    },
+    footerText:{
+        color:"#262626",
+        textAlign:"center",
+        fontSize:15,
+        marginTop:60,
     }
 });
