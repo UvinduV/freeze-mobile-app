@@ -1,6 +1,8 @@
 import {Text, StyleSheet, TextInput, View, Button, TouchableOpacity} from "react-native";
 import {Link, router, useRouter} from "expo-router";
 import {useState} from "react";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Fonttisto from "react-native-vector-icons/Fontisto";
 import Fontisto from "react-native-vector-icons/Fontisto";
 
 export default function Index(){
@@ -18,13 +20,19 @@ export default function Index(){
     return (
         <View style={styles.container}>
             <Text style={styles.mainText}>Welcome to Freeze.!</Text>
+            <View>
+                <Text style={styles.signInTxt}>Sign in your account</Text>
+            </View>
 
             <View style={styles.inputContainer}>
+                <FontAwesome name={"user"} size={24} color={"#9A9A9A"} style={styles.inputIcon}></FontAwesome>
                 <TextInput style={styles.textInput} placeholder={"Username"} onChangeText={setUsername}/>
             </View>
             <View style={styles.inputContainer}>
+                <Fontisto name={"locked"} size={24} color={"#9A9A9A"} style={styles.inputIcon}></Fontisto>
                 <TextInput style={styles.textInput} placeholder={"Password"} secureTextEntry onChangeText={setPassword}/>
             </View>
+            <Text style={styles.forgotPassword}>Forgot Your Password?</Text>
 
             {/*<Button onPress={handleLogin} title='Login'/>*/}
             <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
@@ -44,19 +52,23 @@ const styles = StyleSheet.create({
         backgroundColor: "#ffeded",
     },
     mainText: {
-        fontSize: 30,
+        fontSize: 35,
         fontWeight: 600,
-        marginBottom: 60,
+        marginBottom: 20,
         fontFamily: 'Papyrus',
+        textAlign:"center",
     },
 
     inputContainer: {
         backgroundColor: "#fff",
         height: 45,
-        borderRadius: 12,
+        borderRadius: 20,
         alignItems: "center",
         flexDirection: "row",
-        marginVertical:10
+        marginVertical:20,
+        marginHorizontal:40,
+        elevation:20
+
     },
     textInput: {
         flex: 1,
@@ -83,4 +95,20 @@ const styles = StyleSheet.create({
         fontSize:12,
         marginTop:20,
     },
+    signInTxt:{
+        textAlign:"center",
+        fontSize:18,
+        color:"#262626",
+        marginBottom:40,
+        fontWeight:"thin",
+    },
+    inputIcon:{
+        marginLeft:15,
+    },
+    forgotPassword:{
+        color:"#BEBEBE",
+        textAlign:"right",
+        width:"90%",
+        fontSize:12,
+    }
 });

@@ -27,7 +27,7 @@ const ProductCart = ({item}) => {
                     style={styles.imageProduct}/>
                 <View style={styles.content}>
                     <Text style={styles.title}>{item.title}</Text>
-                    <Text style={styles.price}>${item.price}</Text>
+                    <Text style={styles.price}>Rs:{item.price}</Text>
                 </View>
             </TouchableOpacity>
 
