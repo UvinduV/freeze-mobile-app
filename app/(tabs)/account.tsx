@@ -17,6 +17,15 @@ export default function Account(){
             <TouchableOpacity style={styles.viewOrderButton}>
                 <Text style={styles.buttonText}> My Orders </Text>
             </TouchableOpacity>
+            <View style={styles.cardMain}>
+                <View style={styles.cardContainer}>
+                    <Text style={styles.title}>Polo t-shirt</Text>
+                    <Text style={styles.price}>Rs.1780.00</Text>
+                    <View style={styles.cardSizeContainer}>
+                        <Text> M </Text>
+                    </View>
+                </View>
+            </View>
         </View>
     )
 }
@@ -55,5 +64,36 @@ const styles = StyleSheet.create({
         textAlign:"right",
         padding:10,
         marginRight:20
+    },
+
+//
+    cardMain: {
+        marginVertical:10,
+        flexDirection:"row",
+        backgroundColor: "#f8a065",
+        borderRadius:5,
+    },
+
+    cardContainer: {
+        flex: 1,
+
+    },
+    title: {
+        fontSize:18,
+        color:"#494848",
+        fontWeight:"500",
+    },
+    price: {
+        color:"#494848",
+        marginVertical:10,
+        fontSize:15,
+    },
+    cardSizeContainer: {
+        height:30,
+        width:30,
+        borderRadius:16,
+        backgroundColor:"#fff",
+        justifyContent:"center",
+        alignItems:"center"
     }
 })

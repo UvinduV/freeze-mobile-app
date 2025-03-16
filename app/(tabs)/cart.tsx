@@ -3,8 +3,11 @@ import Header from "../../components/header";
 import CartCard from "../../components/cartCard";
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
+import {useRouter} from "expo-router";
 
 export default function Cart(){
+
+    const router = useRouter();
     const carts = useSelector(state => state.cart);
     const [totalPrice, setTotalPrice] = useState(0);
 
@@ -13,6 +16,10 @@ export default function Cart(){
         totalSum = totalSum.toFixed(2);
         setTotalPrice(totalSum);
     };
+    const handlePlaceOrder = () => {
+        alert("place order successfully.!");
+        router.navigate("(tabs)/account")
+    }
     useEffect(() => {
         calculateTotalPrice();
     }, []);
@@ -38,7 +45,7 @@ export default function Cart(){
                 </View>
             </View>
             <TouchableOpacity style={styles.placeButton}>
-                <Text style={styles.buttonText}>Place Order</Text>
+                <Text style={styles.buttonText} onPress={handlePlaceOrder}>Place Order</Text>
             </TouchableOpacity>
         </View>
     )
